@@ -277,7 +277,6 @@ def train(
             logger.info("Removing old training state.")
             logger.info("Path: " + prev_state_path)
             os.remove(prev_state_path)
-        logger.info('')
 
     # Remove last training state, if we want to keep training, we need to 
     # reinitate the schedulers etc. anyways
@@ -301,7 +300,8 @@ def train(
         del train_dataloader
         del train_sampler
         del optimizer
-        model = torch.load(os.path.join(serialization_dir, 'model.pt'), map_location=device, weights_only=False)
+        print(os.path.join(serialization_dir, 'model.pt'))
+        model = torch.load(os.path.join(r"C:\Users\isaac\PycharmProjects\SkillSpan",serialization_dir, 'model.pt'), map_location=device,weights_only=False)
         for dataset_name in dataset_configs:
             model.reset_metrics()
             task_types = [dataset_configs[dataset_name]['tasks'][task]['task_type'] for task in dataset_configs[dataset_name]['tasks']]

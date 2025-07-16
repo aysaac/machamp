@@ -210,6 +210,9 @@ def write_pred(out_file, batch, device, dev_dataset, model, dataset_config, raw_
                 sent_dict[task][key] = out_dict[task][key][i]
         output = to_string(batch[i].full_data, sent_dict, dataset_config, batch[i].no_unk_subwords,
                             model.vocabulary, enc_batch['token_ids'][i], )
+        print("////")
+        print(output)
+        print("////")
         out_file.write(output + '\n')
 
 def predict_with_paths(model, input_path, output_path, dataset, batch_size, raw_text, device, conn = '=', sep = '|', multi_threshold=None, max_sents=-1):
@@ -230,7 +233,7 @@ def predict_with_paths(model, input_path, output_path, dataset, batch_size, raw_
     dev_sampler = MachampBatchSampler(dev_dataset, batch_size, 1024, False, 1.0, False, False, False)  # 1024 hardcoded
     dev_dataloader = DataLoader(dev_dataset, batch_sampler=dev_sampler, collate_fn=lambda x: x)
 
-    out_file = open(output_path, 'w')
+    out_file = open(output_path, 'w', encoding='utf-8')
     idx = 0
     for batch in tqdm(dev_dataloader, file=sys.stdout):
         if batch == []:

@@ -308,4 +308,9 @@ class Callback:
         tgt = os.path.join(self.serialization_dir, 'model.pt')
         logger.info(
             "Best performance obtained in epoch " + str(epoch) + ' linking model ' + src + ' as ' + tgt + '.')
-        os.symlink(src, tgt)
+        # os.symlink(src, tgt)
+        import shutil
+        print("\\\\\\\\\\\\\\\\\\\\\\")
+        print(os.path.join(self.serialization_dir, src))
+        print("\\\\\\\\\\\\\\\\\\\\\\")
+        shutil.copyfile(os.path.join(r"C:\Users\isaac\PycharmProjects\SkillSpan",self.serialization_dir, src), tgt)
